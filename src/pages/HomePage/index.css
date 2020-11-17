@@ -17,21 +17,18 @@
 }
 
 .column-menu-bar .container-list {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
-.column-menu-bar ul {
-  list-style-type: none;
-}
-
-.column-menu-bar li {
+.column-menu-bar .container-list div {
   display: flex;
   align-items: center;
-  margin: 8px 0;
   padding: 16px 52px;
 }
 
-.column-menu-bar li img {
+.column-menu-bar .container-list img {
   margin-right: 20px;
 }
 

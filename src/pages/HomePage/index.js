@@ -7,13 +7,33 @@ import UserIcon from "../../images/icon-user.svg";
 import LogoutIcon from "../../images/icon-logout.svg";
 import IconDollar from "../../images/dollar-sign.svg";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./index.css";
 
+const navLinks = [
+  {
+    path: "/home",
+    name: "Home",
+    img: HomeIcon,
+    alt: "Ícone da home",
+  },
+  {
+    path: "/charges",
+    name: "Cobranças",
+    img: BillingIcon,
+    alt: "Ícone criar cobrança",
+  },
+  {
+    path: "/customers",
+    name: "Clientes",
+    img: CustomersIcon,
+    alt: "Ícone clientes",
+  },
+];
+
 export function HomePage() {
   const [showLogout, setShowLogout] = React.useState(false);
-  const [menuSelected, setMenuSelected] = React.useState("home");
 
   return (
     <>
@@ -23,41 +43,20 @@ export function HomePage() {
             <img src={LogoAcademyWhite} alt="Logo da Academy" />
           </div>
           <div className="container-list">
-            <ul>
-              <li className={menuSelected === "home" ? "selected" : ""}>
-                <img src={HomeIcon} alt="Ícone da home" />
-                <Link
-                  to="/home"
-                  onClick={() => {
-                    setMenuSelected("home");
-                  }}
+            {navLinks.map((nav) => {
+              return (
+                <NavLink
+                  key={nav.name}
+                  to={nav.path}
+                  activeClassName="selected"
                 >
-                  Home
-                </Link>
-              </li>
-              <li className={menuSelected === "charges" ? "selected" : ""}>
-                <img src={BillingIcon} alt="Ícone criar cobrança" />
-                <Link
-                  to="/home"
-                  onClick={() => {
-                    setMenuSelected("charges");
-                  }}
-                >
-                  Cobranças
-                </Link>
-              </li>
-              <li className={menuSelected === "customers" ? "selected" : ""}>
-                <img src={CustomersIcon} alt="Ícone clientes" />
-                <Link
-                  to="/home"
-                  onClick={() => {
-                    setMenuSelected("customers");
-                  }}
-                >
-                  Clientes
-                </Link>
-              </li>
-            </ul>
+                  <div>
+                    <img src={nav.img} alt={nav.alt} />
+                    {nav.name}
+                  </div>
+                </NavLink>
+              );
+            })}
           </div>
           <button>Criar cobrança</button>
         </div>
@@ -79,8 +78,7 @@ export function HomePage() {
                 <img src={UserIcon} alt="Ícone do usuário" />
               </button>
               {showLogout && (
-                <button className="logout" onClick={() => {}}>
-                  {/* Rever jaja */}
+                <button className="logout">
                   <img src={LogoutIcon} alt="Ícone deslogar" />
                   Deslogar
                 </button>
@@ -115,7 +113,7 @@ export function HomePage() {
               </div>
               <div className="content-card">
                 <div className="data expected">
-                  <span>Em dia</span>
+                  <span>Previsto</span>
                   <span className="cont">0</span>
                 </div>
                 <div className="data in-day">

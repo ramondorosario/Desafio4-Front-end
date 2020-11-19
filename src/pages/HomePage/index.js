@@ -32,8 +32,23 @@ const navLinks = [
   },
 ];
 
+function MenuButton(props) {
+  const { menuSelected, setMenuSelected, children, name } = props;
+  return (
+    <button
+      className={menuSelected === name ? "menu-selected" : ""}
+      onClick={() => {
+        setMenuSelected(name);
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
 export function HomePage() {
   const [showLogout, setShowLogout] = React.useState(false);
+  const [menuSelected, setMenuSelected] = React.useState("este mês");
 
   return (
     <>
@@ -84,6 +99,26 @@ export function HomePage() {
                 </button>
               )}
             </div>
+          </div>
+          <div className="menu-cards">
+            <MenuButton
+              menuSelected={menuSelected}
+              setMenuSelected={setMenuSelected}
+              children="Este mês"
+              name="este mês"
+            />
+            <MenuButton
+              menuSelected={menuSelected}
+              setMenuSelected={setMenuSelected}
+              children="Este ano"
+              name="este ano"
+            />
+            <MenuButton
+              menuSelected={menuSelected}
+              setMenuSelected={setMenuSelected}
+              children="Desde o início"
+              name="desde o início"
+            />
           </div>
           <div className="container-cards">
             <div className="card">

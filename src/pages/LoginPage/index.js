@@ -15,7 +15,7 @@ export function LoginPage() {
   const password = watch("password");
 
   return (
-    <div className="container">
+    <div className="container-login">
       <form
         onSubmit={handleSubmit((data) => {
           console.log(data);

@@ -1,4 +1,3 @@
-import React, { Children } from "react";
 import SearchIcon from "../../images/icon-search.svg";
 import EditIcon from "../../images/icon-edit.svg";
 import EmailIcon from "../../images/icon-email.svg";
@@ -6,13 +5,24 @@ import TelephoneIcon from "../../images/icon-telephone.svg";
 import BackIcon from "../../images/icon-back.svg";
 import NextIcon from "../../images/icon-next.svg";
 
+import { useHistory } from "react-router-dom";
+
 import "./index.css";
 
 export function CustomersPage() {
+  const History = useHistory();
+
   return (
     <>
       <div className="container-nav">
-        <button className="add-client">Adicionar cliente</button>
+        <button
+          className="add-client"
+          onClick={() => {
+            History.push("/customers/add");
+          }}
+        >
+          Adicionar cliente
+        </button>
         <div className="container-search">
           <input placeholder="Procurar por Nome, E-mail ou CPF" />
           <button>

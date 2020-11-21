@@ -1,9 +1,6 @@
 import React from "react";
 import "./index.css";
 
-import { LoginPage } from "./pages/LoginPage";
-import { SignupPage } from "./pages/SignupPage";
-import { HomePage } from "./pages/HomePage";
 import LogoAcademyWhite from "./images/logo-academy-white.svg";
 import HomeIcon from "./images/icon-home.svg";
 import CustomersIcon from "./images/icon-customers.svg";
@@ -12,9 +9,13 @@ import UserIcon from "./images/icon-user.svg";
 import LogoutIcon from "./images/icon-logout.svg";
 import IconDollar from "./images/dollar-sign.svg";
 
-import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+import { LoginPage } from "./pages/LoginPage";
+import { SignupPage } from "./pages/SignupPage";
+import { HomePage } from "./pages/HomePage";
 import { CustomersPage } from "./pages/CustomersPage";
+import { AddCustomersPage } from "./pages/CustomersAddPage";
 
+import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
 const navLinks = [
   {
     path: "/home",
@@ -45,7 +46,7 @@ export default function App() {
       <Switch>
         {!logged && (
           <>
-            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
           </>
         )}
@@ -103,6 +104,11 @@ export default function App() {
               <Switch>
                 <Route exact path="/home" component={HomePage} />
                 <Route exact path="/customers" component={CustomersPage} />
+                <Route
+                  exact
+                  path="/customers/add"
+                  component={AddCustomersPage}
+                />
               </Switch>
             </div>
           </div>

@@ -13,6 +13,7 @@ import LogoutIcon from "./images/icon-logout.svg";
 import IconDollar from "./images/dollar-sign.svg";
 
 import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+import { CustomersPage } from "./pages/CustomersPage";
 
 const navLinks = [
   {
@@ -101,6 +102,7 @@ export default function App() {
               </div>
               <Switch>
                 <Route exact path="/home" component={HomePage} />
+                <Route exact path="/customers" component={CustomersPage} />
               </Switch>
             </div>
           </div>

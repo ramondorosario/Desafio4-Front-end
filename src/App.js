@@ -9,13 +9,13 @@ import UserIcon from "./images/icon-user.svg";
 import LogoutIcon from "./images/icon-logout.svg";
 import IconDollar from "./images/dollar-sign.svg";
 
-import { LoginPage } from "./pages/LoginPage";
-import { SignupPage } from "./pages/SignupPage";
-import { HomePage } from "./pages/HomePage";
-import { CustomersPage } from "./pages/CustomersPage";
-import { AddCustomersPage } from "./pages/AddCustomersPage";
-import { EditCustomerPage } from "./pages/EditCustomerPage";
-import { ChargesPage } from "./pages/ChargesPage";
+import { LoginPage } from "./components/LoginPage";
+import { SignupPage } from "./components/SignupPage";
+import { HomePage } from "./components/HomePage";
+import { CustomersPage } from "./components/CustomersPage";
+import { AddCustomersPage } from "./components/AddCustomersPage";
+import { EditCustomerPage } from "./components/EditCustomerPage";
+import { ChargesPage } from "./components/ChargesPage";
 
 import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
 
@@ -41,7 +41,7 @@ const navLinks = [
 ];
 
 export default function App() {
-  const [logged, setLogged] = React.useState(false);
+  const [logged, setLogged] = React.useState(true);
   const [showLogout, setShowLogout] = React.useState(false);
 
   return (

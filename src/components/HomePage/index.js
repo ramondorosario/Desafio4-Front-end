@@ -1,9 +1,8 @@
 import React from "react";
+import "./index.css";
 
 import CustomersIcon from "../../images/icon-customers.svg";
 import BillingIcon from "../../images/icon-billing.svg";
-
-import "./index.css";
 
 function MenuButton(props) {
   const { menuSelected, setMenuSelected, children, name } = props;

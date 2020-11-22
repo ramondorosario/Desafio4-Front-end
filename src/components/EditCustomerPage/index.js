@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from "react";
+import "../AddCustomersPage/index.css";
+
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import "../AddCustomersPage/index.css";
 
 export function EditCustomerPage() {
   const History = useHistory();

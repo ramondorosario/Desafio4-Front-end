@@ -1,8 +1,8 @@
-.contaier-customers {
+.container-customers {
   margin: 60px 72px;
 }
 
-.contaier-customers h2 {
+.container-customers h2 {
   font-size: 24px;
   font-weight: normal;
   text-transform: uppercase;
@@ -10,7 +10,7 @@
   margin-bottom: 24px;
 }
 
-.contaier-customers form {
+.container-customers form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@
   padding: 40px 225px;
 }
 
-.contaier-customers form label {
+.container-customers form label {
   display: flex;
   flex-direction: column;
 
@@ -31,7 +31,7 @@
   font-size: 16px;
 }
 
-.contaier-customers form input {
+.container-customers form input {
   height: 35px;
   border: 1px solid #374952;
   border-radius: 8px;
@@ -40,29 +40,29 @@
   font-size: 12px;
 }
 
-.contaier-customers form input {
+.container-customers form input {
   margin-top: 8px;
 }
 
-.contaier-customers div {
+.container-customers div {
   display: flex;
   width: 100%;
 }
 
-.contaier-customers div label {
+.container-customers div label {
   margin-right: 16px;
 }
 
-.contaier-customers div label:last-child {
+.container-customers div label:last-child {
   margin-right: 0;
 }
 
-.contaier-customers .container-buttons {
+.container-customers .container-buttons {
   display: flex;
   justify-content: flex-end;
 }
 
-.contaier-customers button {
+.container-customers button {
   background-color: transparent;
   border: 2px solid #da0175;
   color: #da0175;
@@ -72,17 +72,26 @@
   font-weight: 600;
 }
 
-.contaier-customers button:hover {
+.container-customers button:hover {
   background-color: #da0175;
   color: #ffffff;
 }
 
-.contaier-customers .config-button {
+.container-customers .config-button {
   color: white;
   border-color: transparent;
   background-color: rgba(218, 1, 117, 0.35);
 }
 
-.contaier-customers .config-button:hover {
+.container-customers .config-button:hover {
   background-color: rgba(218, 1, 117, 0.35);
+}
+
+.container-customers .config-button-selected {
+  background-color: #da0175;
+  color: white;
+}
+
+.container-customers .config-button-selected:hover {
+  background-color: #da0175de;
 }

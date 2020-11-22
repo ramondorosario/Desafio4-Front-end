@@ -5,30 +5,40 @@ import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export function AddCustomersPage() {
+  const { handleSubmit, register, watch } = useForm();
   const History = useHistory();
 
+  const name = watch("name");
+  const email = watch("email");
+  const cpf = watch("cpf");
+  const tel = watch("tel");
+
   return (
-    <div className="contaier-customers">
+    <div className="container-customers">
       <header className="content-add">
         <h2>// Adicionar Cliente</h2>
       </header>
-      <form onSubmit={() => {}}>
+      <form
+        onSubmit={handleSubmit(async (datas) => {
+          History.push("/customers");
+        })}
+      >
         <label>
           Nome
-          <input name="name" />
+          <input name="name" ref={register} />
         </label>
         <label>
           Email
-          <input name="email" type="email" />
+          <input name="email" ref={register} type="email" />
         </label>
         <div>
           <label>
             CPF
-            <input name="cpf" inputMode="numeric" />
+            <input name="cpf" ref={register} inputMode="numeric" />
           </label>
           <label>
             Telefone
-            <input name="tel" inputMode="numeric" />
+            <input name="tel" ref={register} inputMode="numeric" />
           </label>
         </div>
         <div className="container-buttons">
@@ -40,10 +50,12 @@ export function AddCustomersPage() {
             Cancelar
           </button>
           <button
-            className="config-button"
-            onClick={() => {
-              History.push("/customers");
-            }}
+            disabled={!name || !email || !cpf || !tel}
+            className={
+              name && email && cpf && tel
+                ? "config-button-selected"
+                : "config-button"
+            }
           >
             Adicionar cliente
           </button>

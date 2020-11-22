@@ -1,37 +1,44 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from "react";
-import "../AddCustomersPage/index.css";
 import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import "../AddCustomersPage/index.css";
 
 export function EditCustomerPage() {
   const History = useHistory();
+  const { handleSubmit, register, watch } = useForm();
+
+  const name = watch("name");
+  const email = watch("email");
+  const cpf = watch("cpf");
+  const tel = watch("tel");
 
   return (
-    <div className="contaier-customers">
+    <div className="container-customers">
       <header className="content-add">
         <h2>// Editar Cliente</h2>
       </header>
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
+        onSubmit={handleSubmit(async (datas) => {
+          History.push("/customers");
+        })}
       >
         <label>
           Nome
-          <input name="name" />
+          <input name="name" ref={register} />
         </label>
         <label>
           Email
-          <input name="email" type="email" />
+          <input name="email" ref={register} type="email" />
         </label>
         <div>
           <label>
             CPF
-            <input name="cpf" inputMode="numeric" />
+            <input name="cpf" ref={register} inputMode="numeric" />
           </label>
           <label>
             Telefone
-            <input name="tel" inputMode="numeric" />
+            <input name="tel" ref={register} inputMode="numeric" />
           </label>
         </div>
         <div className="container-buttons">
@@ -43,10 +50,12 @@ export function EditCustomerPage() {
             Cancelar
           </button>
           <button
-            className="config-button"
-            onClick={() => {
-              History.push("/customers");
-            }}
+            disabled={!name || !email || !cpf || !tel}
+            className={
+              name && email && cpf && tel
+                ? "config-button-selected"
+                : "config-button"
+            }
           >
             Salvar alterações
           </button>

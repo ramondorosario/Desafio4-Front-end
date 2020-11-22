@@ -190,3 +190,109 @@ tbody button {
   margin: 0;
   padding: 0;
 }
+
+/* Janelas com formulários */
+.container-content-form {
+  margin: 0 72px 60px 72px;
+}
+
+.container-content-form h2 {
+  font-size: 24px;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+.container-content-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 40px 225px;
+}
+
+.container-content-form form label {
+  display: flex;
+  flex-direction: column;
+
+  margin: 16px 0;
+  width: 100%;
+  color: #374952;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.container-content-form form input,
+.container-content-form form textarea {
+  height: 35px;
+  border: 1px solid #374952;
+  color: #323232;
+  border-radius: 8px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.container-content-form form textarea {
+  resize: none;
+  height: 56px;
+  margin-top: 8px;
+}
+
+.container-content-form form input {
+  margin-top: 8px;
+}
+
+.container-content-form div {
+  display: flex;
+  width: 100%;
+}
+
+.container-content-form div label {
+  margin-right: 16px;
+}
+
+.container-content-form div label:last-child {
+  margin-right: 0;
+}
+
+.container-content-form .container-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container-content-form button {
+  background-color: transparent;
+  border: 2px solid #da0175;
+  color: #da0175;
+  padding: 0.5em 3em;
+  border-radius: 20px;
+  margin: 32px 0 16px 16px;
+  font-weight: 600;
+}
+
+.container-content-form button:hover {
+  background-color: #da0175;
+  color: #ffffff;
+}
+
+.container-content-form .config-button {
+  color: white;
+  border-color: transparent;
+  background-color: rgba(218, 1, 117, 0.35);
+}
+
+.container-content-form .config-button:hover {
+  background-color: rgba(218, 1, 117, 0.35);
+}
+
+.container-content-form .config-button-selected {
+  background-color: #da0175;
+  color: white;
+}
+
+.container-content-form .config-button-selected:hover {
+  background-color: #da0175de;
+}

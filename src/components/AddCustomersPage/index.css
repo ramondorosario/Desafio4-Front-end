@@ -1,8 +1,8 @@
-.container-customers {
+.container-content-form {
   margin: 0 72px 60px 72px;
 }
 
-.container-customers h2 {
+.container-content-form h2 {
   font-size: 24px;
   font-weight: normal;
   text-transform: uppercase;
@@ -10,7 +10,7 @@
   margin-bottom: 24px;
 }
 
-.container-customers form {
+.container-content-form form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@
   padding: 40px 225px;
 }
 
-.container-customers form label {
+.container-content-form form label {
   display: flex;
   flex-direction: column;
 
@@ -31,7 +31,7 @@
   font-size: 16px;
 }
 
-.container-customers form input {
+.container-content-form form input {
   height: 35px;
   border: 1px solid #374952;
   border-radius: 8px;
@@ -40,29 +40,29 @@
   font-size: 12px;
 }
 
-.container-customers form input {
+.container-content-form form input {
   margin-top: 8px;
 }
 
-.container-customers div {
+.container-content-form div {
   display: flex;
   width: 100%;
 }
 
-.container-customers div label {
+.container-content-form div label {
   margin-right: 16px;
 }
 
-.container-customers div label:last-child {
+.container-content-form div label:last-child {
   margin-right: 0;
 }
 
-.container-customers .container-buttons {
+.container-content-form .container-buttons {
   display: flex;
   justify-content: flex-end;
 }
 
-.container-customers button {
+.container-content-form button {
   background-color: transparent;
   border: 2px solid #da0175;
   color: #da0175;
@@ -72,26 +72,26 @@
   font-weight: 600;
 }
 
-.container-customers button:hover {
+.container-content-form button:hover {
   background-color: #da0175;
   color: #ffffff;
 }
 
-.container-customers .config-button {
+.container-content-form .config-button {
   color: white;
   border-color: transparent;
   background-color: rgba(218, 1, 117, 0.35);
 }
 
-.container-customers .config-button:hover {
+.container-content-form .config-button:hover {
   background-color: rgba(218, 1, 117, 0.35);
 }
 
-.container-customers .config-button-selected {
+.container-content-form .config-button-selected {
   background-color: #da0175;
   color: white;
 }
 
-.container-customers .config-button-selected:hover {
+.container-content-form .config-button-selected:hover {
   background-color: #da0175de;
 }

@@ -15,8 +15,10 @@ import { HomePage } from "./pages/HomePage";
 import { CustomersPage } from "./pages/CustomersPage";
 import { AddCustomersPage } from "./pages/AddCustomersPage";
 import { EditCustomerPage } from "./pages/EditCustomerPage";
+import { ChargesPage } from "./pages/ChargesPage";
 
 import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+
 const navLinks = [
   {
     path: "/home",
@@ -115,6 +117,7 @@ export default function App() {
                   path="/customers/edit"
                   component={EditCustomerPage}
                 />
+                <Route exact path="/charges" component={ChargesPage} />
               </Switch>
             </div>
           </div>

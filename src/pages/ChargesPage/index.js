@@ -1,18 +1,12 @@
 import React from "react";
-import "./index.css";
+import "../CustomersPage/index.css";
 
 import SearchIcon from "../../images/icon-search.svg";
-import EditIcon from "../../images/icon-edit.svg";
-import EmailIcon from "../../images/icon-email.svg";
-import TelephoneIcon from "../../images/icon-telephone.svg";
+import PrintTicketIcon from "../../images/icon-print-ticket.svg";
 import BackIcon from "../../images/icon-back.svg";
 import NextIcon from "../../images/icon-next.svg";
 
-import { useHistory } from "react-router-dom";
-
-export function CustomersPage() {
-  const History = useHistory();
-
+export function ChargesPage() {
   return (
     <>
       <div className="container-nav">
@@ -39,73 +33,53 @@ export function CustomersPage() {
           <thead>
             <tr>
               <th>Cliente</th>
-              <th>Cobranças feitas</th>
-              <th>Cobranças recebidas</th>
+              <th>Descrição</th>
+              <th>Valor</th>
               <th>Status</th>
-              <th />
+              <th>Vencimento</th>
+              <th>Boleto</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td className="datas">
                 <div>Nome e Sobrenome do cliente</div>
-                <div>
-                  <img src={EmailIcon} alt="Ícone email" />
-                  Nome e Sobrenome do cliente
-                </div>
-                <div>
-                  <img src={TelephoneIcon} alt="Ícone telefone" />
-                  Nome e Sobrenome do cliente
-                </div>
               </td>
+              <td>Aqui vai alguma descrição</td>
               <td>R$ 00.000,00</td>
-              <td>R$ 00.000,00</td>
-              <td className="status">Em dia</td>
+              <td className="status">[.....] Inadimplente</td>
+              <td>12/12/2020</td>
               <td>
                 <button>
-                  <img src={EditIcon} alt="Icone editar cliente" />
+                  <img src={PrintTicketIcon} alt="Icone editar cliente" />
                 </button>
               </td>
             </tr>
             <tr>
               <td className="datas">
                 <div>Nome e Sobrenome do cliente</div>
-                <div>
-                  <img src={EmailIcon} alt="Ícone email" />
-                  Nome e Sobrenome do cliente
-                </div>
-                <div>
-                  <img src={TelephoneIcon} alt="Ícone telefone" />
-                  Nome e Sobrenome do cliente
-                </div>
               </td>
+              <td>Aqui vai alguma descrição</td>
               <td>R$ 00.000,00</td>
-              <td>R$ 00.000,00</td>
-              <td className="status">Inadimplente</td>
+              <td className="status">[.....] Inadimplente</td>
+              <td>12/12/2020</td>
               <td>
                 <button>
-                  <img src={EditIcon} alt="Icone editar cliente" />
+                  <img src={PrintTicketIcon} alt="Icone editar cliente" />
                 </button>
               </td>
             </tr>
             <tr>
               <td className="datas">
                 <div>Nome e Sobrenome do cliente</div>
-                <div>
-                  <img src={EmailIcon} alt="Ícone email" />
-                  Nome e Sobrenome do cliente
-                </div>
-                <div>
-                  <img src={TelephoneIcon} alt="Ícone telefone" />
-                  Nome e Sobrenome do cliente
-                </div>
               </td>
+              <td>Aqui vai alguma descrição</td>
               <td>R$ 00.000,00</td>
-              <td>R$ 00.000,00</td>
-              <td className="status">Pendente</td>
+              <td className="status">[.....] Inadimplente</td>
+              <td>12/12/2020</td>
               <td>
                 <button>
-                  <img src={EditIcon} alt="Icone editar cliente" />
+                  <img src={PrintTicketIcon} alt="Icone editar cliente" />
                 </button>
               </td>
             </tr>

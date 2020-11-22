@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 
 import SearchIcon from "../../images/icon-search.svg";
 import EditIcon from "../../images/icon-edit.svg";
@@ -15,7 +14,7 @@ export function CustomersPage() {
 
   return (
     <>
-      <div className="container-nav">
+      <nav>
         <button
           className="add-client"
           onClick={() => {
@@ -33,8 +32,8 @@ export function CustomersPage() {
             </div>
           </button>
         </div>
-      </div>
-      <div className="container-main">
+      </nav>
+      <div className="container-table">
         <table>
           <thead>
             <tr>
@@ -47,8 +46,8 @@ export function CustomersPage() {
           </thead>
           <tbody>
             <tr>
-              <td className="datas">
-                <div>Nome e Sobrenome do cliente</div>
+              <td>
+                <div className="data-name">Nome e Sobrenome do cliente</div>
                 <div>
                   <img src={EmailIcon} alt="Ícone email" />
                   Nome e Sobrenome do cliente
@@ -68,8 +67,8 @@ export function CustomersPage() {
               </td>
             </tr>
             <tr>
-              <td className="datas">
-                <div>Nome e Sobrenome do cliente</div>
+              <td>
+                <div className="data-name">Nome e Sobrenome do cliente</div>
                 <div>
                   <img src={EmailIcon} alt="Ícone email" />
                   Nome e Sobrenome do cliente
@@ -89,8 +88,8 @@ export function CustomersPage() {
               </td>
             </tr>
             <tr>
-              <td className="datas">
-                <div>Nome e Sobrenome do cliente</div>
+              <td>
+                <div className="data-name">Nome e Sobrenome do cliente</div>
                 <div>
                   <img src={EmailIcon} alt="Ícone email" />
                   Nome e Sobrenome do cliente

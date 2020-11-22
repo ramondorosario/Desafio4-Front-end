@@ -1,14 +1,6 @@
 import React from "react";
 import "./index.css";
 
-import LogoAcademyWhite from "./images/logo-academy-white.svg";
-import HomeIcon from "./images/icon-home.svg";
-import CustomersIcon from "./images/icon-customers.svg";
-import BillingIcon from "./images/icon-billing.svg";
-import UserIcon from "./images/icon-user.svg";
-import LogoutIcon from "./images/icon-logout.svg";
-import IconDollar from "./images/dollar-sign.svg";
-
 import { LoginPage } from "./components/LoginPage";
 import { SignupPage } from "./components/SignupPage";
 import { HomePage } from "./components/HomePage";
@@ -16,33 +8,13 @@ import { CustomersPage } from "./components/CustomersPage";
 import { AddCustomersPage } from "./components/AddCustomersPage";
 import { EditCustomerPage } from "./components/EditCustomerPage";
 import { ChargesPage } from "./components/ChargesPage";
+import { Header } from "./components/Header";
 
 import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
-
-const navLinks = [
-  {
-    path: "/home",
-    name: "Home",
-    img: HomeIcon,
-    alt: "Ícone da home",
-  },
-  {
-    path: "/charges",
-    name: "Cobranças",
-    img: BillingIcon,
-    alt: "Ícone criar cobrança",
-  },
-  {
-    path: "/customers",
-    name: "Clientes",
-    img: CustomersIcon,
-    alt: "Ícone clientes",
-  },
-];
+import { MenuBar } from "./components/MenuBar";
 
 export default function App() {
   const [logged, setLogged] = React.useState(true);
-  const [showLogout, setShowLogout] = React.useState(false);
 
   return (
     <BrowserRouter>
@@ -58,52 +30,10 @@ export default function App() {
         <>
           <div className="columns">
             <div className="column-menu-bar">
-              <div className="logo-academy">
-                <img src={LogoAcademyWhite} alt="Logo da Academy" />
-              </div>
-              <div className="container-list">
-                {navLinks.map((nav) => {
-                  return (
-                    <NavLink
-                      key={nav.name}
-                      to={nav.path}
-                      activeClassName="selected"
-                    >
-                      <div>
-                        <img src={nav.img} alt={nav.alt} />
-                        {nav.name}
-                      </div>
-                    </NavLink>
-                  );
-                })}
-              </div>
-              <button>Criar cobrança</button>
+              <MenuBar />
             </div>
             <div className="column-main">
-              <div className="header">
-                <div className="balance">
-                  <p>
-                    <img src={IconDollar} alt="Simbolo do dollar" />
-                    <span>Saldo em conta</span>
-                  </p>
-                  <p className="value-balance">R$ 0,00</p>
-                </div>
-                <div className="user-menu">
-                  <button
-                    onClick={() => {
-                      setShowLogout(!showLogout);
-                    }}
-                  >
-                    <img src={UserIcon} alt="Ícone do usuário" />
-                  </button>
-                  {showLogout && (
-                    <button className="logout">
-                      <img src={LogoutIcon} alt="Ícone deslogar" />
-                      Deslogar
-                    </button>
-                  )}
-                </div>
-              </div>
+              <Header />
               <Switch>
                 <Route exact path="/home" component={HomePage} />
                 <Route exact path="/customers" component={CustomersPage} />

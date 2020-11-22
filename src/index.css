@@ -15,6 +15,7 @@ button:hover {
   cursor: pointer;
 }
 
+/* --------Colunas-------- */
 .columns {
   display: flex;
 }
@@ -30,42 +31,6 @@ button:hover {
   min-height: 100vh;
 }
 
-.column-menu-bar .logo-academy {
-  margin: 32px 0;
-}
-
-.column-menu-bar .container-list div {
-  display: flex;
-  align-items: center;
-  padding: 16px 52px;
-}
-
-.column-menu-bar .container-list img {
-  margin-right: 20px;
-}
-
-.column-menu-bar .selected {
-  background-color: #374952;
-}
-
-.column-menu-bar a {
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.column-menu-bar button {
-  background: #da0175;
-  border-radius: 20px;
-  color: #ffffff;
-  font-weight: 600;
-  border: 0;
-  padding: 0.75rem 3.75rem;
-  margin-top: 325px;
-}
-
 .column-main {
   display: flex;
   flex-direction: column;
@@ -73,70 +38,155 @@ button:hover {
   flex: 1;
 }
 
-.column-main .header {
+/* --------Navs-------- */
+nav {
   display: flex;
   justify-content: space-between;
-  padding: 0 56px 64px 72px;
-  background-color: #ffffff;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 45px;
+  margin: 60px 72px 40px 72px;
 }
 
-.column-main .header .user-menu {
+nav button {
+  padding: 12px 60px;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 2px solid #da0175;
+  color: #da0175;
+  font-weight: 600;
+}
+
+nav button:hover {
+  background-color: #da0175;
+  color: #ffffff;
+}
+
+nav .container-search input {
+  border: 1px solid #374952;
+  border-radius: 8px;
+  padding: 12px 24px;
+  height: 40px;
+  margin: 0;
+  width: 450px;
+}
+
+nav .container-search {
+  position: relative;
+}
+
+nav .container-search button {
+  height: 40px;
+  border-radius: 8px;
+  border: 0;
+  background-color: #374952;
+  padding: 12px 23px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+nav .container-search button:hover {
+  background-color: #374952de;
+}
+
+nav button > div {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 }
 
-.column-main .header button {
-  margin-top: 32px;
+nav button > div img {
+  margin-right: 10px;
+}
+
+/*--------Tabelas--------*/
+.container-table {
+  margin: 0 72px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 16px;
+  width: 100%;
+  text-align: left;
+}
+
+table thead th {
+  background-color: #9dbbc3;
+  color: #ffffff;
+  padding: 6px 23px;
+  font-weight: 600;
+}
+
+thead th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+thead th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+tbody td {
+  background-color: #ffffff;
+  padding: 16px 23px;
+  line-height: 20px;
+}
+
+tbody .data-name {
+  font-weight: 600;
+  color: #4c4c4c;
+}
+
+tbody td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+tbody td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+tbody .status {
+  text-transform: uppercase;
+}
+
+tbody td img {
+  margin-right: 9px;
+}
+
+tbody button {
   background-color: transparent;
   border: 0;
 }
 
-.column-main .header .logout {
+/* Botões de navegação das tabelas (próxima págia e página anterior) */
+.container-buttons {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 
-  font-weight: 400;
-  font-size: 12px;
-  margin: 5px 0 0 0;
-  padding: 0 8px;
-  width: 100px;
-  height: 56px;
-  background: #ffffff;
-  box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 60px;
 }
 
-.column-main .header .logout img {
-  margin-right: 8px;
-}
-
-.column-main .header .balance {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 64px;
-  color: #ffffff;
-  padding: 20px 40px;
-  background-color: #374952;
-  box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-.column-main .balance p {
+.container-buttons button {
   display: flex;
   align-items: center;
+  padding: 5px;
+  margin: 0 5px;
+  background-color: transparent;
+  border: 0;
 }
 
-.column-main .header p:first-child {
-  margin-bottom: 8px;
-}
-
-.column-main .value-balance {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.column-main .balance img {
-  margin-right: 11px;
+.back-page,
+.next-page {
+  margin: 0;
+  padding: 0;
 }

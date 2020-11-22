@@ -1,0 +1,35 @@
+.column-menu-bar .logo-academy {
+  margin: 32px 0;
+}
+
+.column-menu-bar .container-list div {
+  display: flex;
+  align-items: center;
+  padding: 16px 52px;
+}
+
+.column-menu-bar .container-list img {
+  margin-right: 20px;
+}
+
+.column-menu-bar .selected {
+  background-color: #374952;
+}
+
+.column-menu-bar a {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.column-menu-bar button {
+  background: #da0175;
+  border-radius: 20px;
+  color: #ffffff;
+  font-weight: 600;
+  border: 0;
+  padding: 0.75rem 3.75rem;
+  margin-top: 325px;
+}

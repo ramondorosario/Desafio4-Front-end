@@ -1,5 +1,5 @@
 import React from "react";
-import "../CustomersPage/index.css";
+import "./index.css";
 
 import SearchIcon from "../../images/icon-search.svg";
 import PrintTicketIcon from "../../images/icon-print-ticket.svg";
@@ -9,7 +9,7 @@ import NextIcon from "../../images/icon-next.svg";
 export function ChargesPage() {
   return (
     <>
-      <div className="container-nav">
+      <nav className="nav-charges-page">
         <div className="container-search">
           <input placeholder="Procurar por Nome, E-mail ou CPF" />
           <button>
@@ -19,8 +19,8 @@ export function ChargesPage() {
             </div>
           </button>
         </div>
-      </div>
-      <div className="container-main">
+      </nav>
+      <div className="container-table">
         <table>
           <thead>
             <tr>
@@ -34,9 +34,7 @@ export function ChargesPage() {
           </thead>
           <tbody>
             <tr>
-              <td className="datas">
-                <div>Nome e Sobrenome do cliente</div>
-              </td>
+              <td className="data-name"> Nome e Sobrenome do cliente</td>
               <td>Aqui vai alguma descrição</td>
               <td>R$ 00.000,00</td>
               <td className="status">[.....] Inadimplente</td>
@@ -48,9 +46,7 @@ export function ChargesPage() {
               </td>
             </tr>
             <tr>
-              <td className="datas">
-                <div>Nome e Sobrenome do cliente</div>
-              </td>
+              <td className="data-name">Nome e Sobrenome do cliente</td>
               <td>Aqui vai alguma descrição</td>
               <td>R$ 00.000,00</td>
               <td className="status">[.....] Inadimplente</td>
@@ -62,9 +58,7 @@ export function ChargesPage() {
               </td>
             </tr>
             <tr>
-              <td className="datas">
-                <div>Nome e Sobrenome do cliente</div>
-              </td>
+              <td className="data-name">Nome e Sobrenome do cliente</td>
               <td>Aqui vai alguma descrição</td>
               <td>R$ 00.000,00</td>
               <td className="status">[.....] Inadimplente</td>

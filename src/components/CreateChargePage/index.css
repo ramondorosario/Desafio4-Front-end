@@ -1,0 +1,13 @@
+.container-content-form .charge-value {
+  flex: 1;
+}
+
+.container-content-form .charge-expiration {
+  flex: 1.5;
+}
+
+.container-content-form span {
+  font-size: 12px;
+  font-weight: normal;
+  color: #868686;
+}

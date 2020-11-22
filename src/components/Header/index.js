@@ -15,12 +15,14 @@ export function Header() {
     <>
       <div
         className={
-          location.pathname.includes("/customers/")
+          location.pathname.includes("/customers/") ||
+          location.pathname.includes("/charges/")
             ? "header modified"
             : "header"
         }
       >
-        {!location.pathname.includes("/customers/") ? (
+        {!location.pathname.includes("/customers/") &&
+        !location.pathname.includes("/charges/") ? (
           <>
             <div className="balance">
               <p>

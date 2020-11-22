@@ -3,15 +3,16 @@ import "./index.css";
 
 import { LoginPage } from "./components/LoginPage";
 import { SignupPage } from "./components/SignupPage";
+import { Header } from "./components/Header";
+import { MenuBar } from "./components/MenuBar";
 import { HomePage } from "./components/HomePage";
 import { CustomersPage } from "./components/CustomersPage";
 import { AddCustomersPage } from "./components/AddCustomersPage";
 import { EditCustomerPage } from "./components/EditCustomerPage";
 import { ChargesPage } from "./components/ChargesPage";
-import { Header } from "./components/Header";
+import { CreateChargePage } from "./components/CreateChargePage";
 
-import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
-import { MenuBar } from "./components/MenuBar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 export default function App() {
   const [logged, setLogged] = React.useState(true);
@@ -48,6 +49,11 @@ export default function App() {
                   component={EditCustomerPage}
                 />
                 <Route exact path="/charges" component={ChargesPage} />
+                <Route
+                  exact
+                  path="/charges/new-charge"
+                  component={CreateChargePage}
+                />
               </Switch>
             </div>
           </div>

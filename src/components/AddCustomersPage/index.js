@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from "react";
-import "./index.css";
 
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -15,8 +14,8 @@ export function AddCustomersPage() {
   const tel = watch("tel");
 
   return (
-    <div className="container-customers">
-      <header className="content-add">
+    <div className="container-content-form">
+      <header>
         <h2>// Adicionar Cliente</h2>
       </header>
       <form

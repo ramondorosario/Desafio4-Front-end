@@ -6,7 +6,7 @@ import HomeIcon from "../../images/icon-home.svg";
 import CustomersIcon from "../../images/icon-customers.svg";
 import BillingIcon from "../../images/icon-billing.svg";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const navLinks = [
   {
@@ -30,6 +30,8 @@ const navLinks = [
 ];
 
 export function MenuBar() {
+  const History = useHistory();
+
   return (
     <>
       <div className="logo-academy">
@@ -47,7 +49,13 @@ export function MenuBar() {
           );
         })}
       </div>
-      <button>Criar cobrança</button>
+      <button
+        onClick={() => {
+          History.push("/charges/new-charge");
+        }}
+      >
+        Criar cobrança
+      </button>
     </>
   );
 }

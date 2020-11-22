@@ -67,7 +67,7 @@ export function SignupPage() {
         </button>
       </form>
       <div className="msg-signup">
-        Já possui uma conta? <Link to="/login">Acesse aqui!</Link>
+        Já possui uma conta? <Link to="/">Acesse aqui!</Link>
       </div>
     </div>
   );

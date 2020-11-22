@@ -17,6 +17,7 @@ export function LoginPage() {
   return (
     <div className="container-login">
       <form
+        className="form"
         onSubmit={handleSubmit((data) => {
           console.log(data);
         })}

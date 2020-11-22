@@ -10,7 +10,7 @@ body {
   min-height: 100vh;
 }
 
-.container-login form {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,11 +24,11 @@ body {
   border-radius: 1em;
 }
 
-.container-login form > img {
+.form > img {
   margin-bottom: 1.8rem;
 }
 
-.container-login label {
+.form label {
   display: flex;
   flex-direction: column;
 
@@ -40,15 +40,15 @@ body {
   color: #374952;
 }
 
-.container-login input::placeholder {
+.form input::placeholder {
   color: #a5a5a5;
 }
 
-.container-login label:last-of-type {
+.form label:last-of-type {
   margin-bottom: 1rem;
 }
 
-.container-login input {
+.form input {
   margin: 0.9rem 0;
   padding: 0.8rem 0.3rem;
   height: 1.5rem;
@@ -56,29 +56,29 @@ body {
   font-size: 0.85em;
 }
 
-.container-login .input-password {
+.form .input-password {
   font-size: 1.5em;
 }
 
-.container-login .input-password.teste {
+.form .input-password.teste {
   font-size: 0.85em;
 }
 
-.container-login .forgot-password {
+.form .forgot-password {
   font-size: 0.75em;
   align-self: flex-end;
   color: #263238;
 }
 
-.container-login .forgot-password a:hover {
+.form .forgot-password a:hover {
   color: #263238b7;
 }
 
-.container-login .forgot-password a:visited {
+.form .forgot-password a:visited {
   color: #263238;
 }
 
-.container-login form > button {
+.form > button {
   margin-top: 3rem;
   background: rgba(218, 1, 117, 0.35);
   border-radius: 1.25rem;
@@ -87,7 +87,7 @@ body {
   border: 0;
 }
 
-.container-login form > button:hover {
+.form button:hover {
   cursor: default;
 }
 

@@ -13,7 +13,8 @@ import { LoginPage } from "./pages/LoginPage";
 import { SignupPage } from "./pages/SignupPage";
 import { HomePage } from "./pages/HomePage";
 import { CustomersPage } from "./pages/CustomersPage";
-import { AddCustomersPage } from "./pages/CustomersAddPage";
+import { AddCustomersPage } from "./pages/AddCustomersPage";
+import { EditCustomerPage } from "./pages/EditCustomerPage";
 
 import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
 const navLinks = [
@@ -108,6 +109,11 @@ export default function App() {
                   exact
                   path="/customers/add"
                   component={AddCustomersPage}
+                />
+                <Route
+                  exact
+                  path="/customers/edit"
+                  component={EditCustomerPage}
                 />
               </Switch>
             </div>

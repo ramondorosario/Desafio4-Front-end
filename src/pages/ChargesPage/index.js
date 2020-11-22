@@ -10,14 +10,6 @@ export function ChargesPage() {
   return (
     <>
       <div className="container-nav">
-        <button
-          className="add-client"
-          onClick={() => {
-            History.push("/customers/add");
-          }}
-        >
-          Adicionar cliente
-        </button>
         <div className="container-search">
           <input placeholder="Procurar por Nome, E-mail ou CPF" />
           <button>

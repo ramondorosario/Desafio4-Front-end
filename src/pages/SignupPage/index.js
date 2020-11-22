@@ -16,8 +16,9 @@ export function SignupPage() {
   const name = watch("name");
 
   return (
-    <div className="container">
+    <div className="container-form">
       <form
+        className="form"
         onSubmit={handleSubmit((data) => {
           console.log(data);
         })}

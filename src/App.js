@@ -41,7 +41,7 @@ const navLinks = [
 ];
 
 export default function App() {
-  const [logged, setLogged] = React.useState(true);
+  const [logged, setLogged] = React.useState(false);
   const [showLogout, setShowLogout] = React.useState(false);
 
   return (

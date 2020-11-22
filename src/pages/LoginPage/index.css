@@ -2,7 +2,7 @@ body {
   background-color: #f7f7f7;
 }
 
-.container-login {
+.container-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,40 +91,40 @@ body {
   cursor: default;
 }
 
-.container-login .not-disabled {
-  background: #da0175;
-}
-
-.container-login .not-disabled:hover {
-  background: #da0175de;
-  cursor: pointer;
-}
-
-.container-login .msg-signup {
-  margin-top: 2rem;
-  font-weight: 400;
-  font-size: 0.85rem;
-}
-
-.container-login .msg-signup a {
-  color: rgba(218, 1, 117, 0.35);
-  font-weight: 500;
-}
-
-.container-login .msg-signup a:hover {
-  color: rgba(218, 1, 117, 0.267);
-}
-
-.container-password {
-  position: relative;
-}
-
-.container-password label > button {
+.form label > button {
   border: 0;
   background-color: transparent;
   position: absolute;
   bottom: 0.8rem;
   right: 0.9rem;
+}
+
+.container-form .not-disabled {
+  background: #da0175;
+}
+
+.container-form .not-disabled:hover {
+  background: #da0175de;
+  cursor: pointer;
+}
+
+.container-form .msg-signup {
+  margin-top: 2rem;
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.container-form .msg-signup a {
+  color: rgba(218, 1, 117, 0.35);
+  font-weight: 500;
+}
+
+.container-form .msg-signup a:hover {
+  color: rgba(218, 1, 117, 0.267);
+}
+
+.container-password {
+  position: relative;
 }
 
 :focus:not(:focus-visible) {

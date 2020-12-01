@@ -7,9 +7,12 @@ import IconDollar from "../../images/dollar-sign.svg";
 
 import { useLocation } from "react-router-dom";
 
+import { LoginContainer } from "../../index";
+
 export function Header() {
   const [showLogout, setShowLogout] = React.useState(false);
   const location = useLocation();
+  const { logout } = LoginContainer.useContainer();
 
   return (
     <>
@@ -44,7 +47,7 @@ export function Header() {
             <img src={UserIcon} alt="Ícone do usuário" />
           </button>
           {showLogout && (
-            <button className="logout">
+            <button className="logout" onClick={logout}>
               <img src={LogoutIcon} alt="Ícone deslogar" />
               Deslogar
             </button>

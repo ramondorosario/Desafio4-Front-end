@@ -7,10 +7,12 @@ import ShowPassword from "../../images/show-password.svg";
 
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { LoginContainer } from "../../index";
 
 export function LoginPage() {
   const { register, handleSubmit, watch } = useForm();
   const [hiddenPassword, setHiddenPassword] = React.useState("false");
+  const { login } = LoginContainer.useContainer();
 
   const email = watch("email");
   const password = watch("password");
@@ -19,8 +21,9 @@ export function LoginPage() {
     <div className="container-form">
       <form
         className="form"
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
+        onSubmit={handleSubmit(async (data) => {
+          const { email, password } = data;
+          login(email, password);
         })}
       >
         <img src={LogoAcademy} alt="Logo da Academy" />

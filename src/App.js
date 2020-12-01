@@ -12,22 +12,25 @@ import { EditCustomerPage } from "./components/EditCustomerPage";
 import { ChargesPage } from "./components/ChargesPage";
 import { CreateChargePage } from "./components/CreateChargePage";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+
+import { LoginContainer } from "./index";
 
 export default function App() {
-  const [logged, setLogged] = React.useState(true);
+  const { token } = LoginContainer.useContainer();
 
   return (
     <BrowserRouter>
       <Switch>
-        {!logged && (
+        {!token && (
           <>
-            <Route exact path="/" component={LoginPage} />
+            <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
+            <Route exact path="*" render={() => <Redirect to="/login" />} />
           </>
         )}
       </Switch>
-      {logged && (
+      {token && (
         <>
           <div className="columns">
             <div className="column-menu-bar">
@@ -54,6 +57,7 @@ export default function App() {
                   path="/charges/new-charge"
                   component={CreateChargePage}
                 />
+                <Route exact path="*" render={() => <Redirect to="/home" />} />
               </Switch>
             </div>
           </div>

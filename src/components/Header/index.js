@@ -8,11 +8,19 @@ import IconDollar from "../../images/dollar-sign.svg";
 import { useLocation } from "react-router-dom";
 
 import { LoginContainer } from "../../index";
+import { RelatorioContainer } from "../../App";
 
 export function Header() {
   const [showLogout, setShowLogout] = React.useState(false);
-  const location = useLocation();
+
   const { logout } = LoginContainer.useContainer();
+  const { saldo, obterRelatorio } = RelatorioContainer.useContainer();
+
+  const location = useLocation();
+
+  React.useEffect(() => {
+    obterRelatorio();
+  }, []);
 
   return (
     <>
@@ -32,7 +40,7 @@ export function Header() {
                 <img src={IconDollar} alt="Simbolo do dollar" />
                 <span>Saldo em conta</span>
               </p>
-              <p className="value-balance">R$ 0,00</p>
+              <p className="value-balance">R$ {saldo.toFixed(2)}</p>
             </div>
           </>
         ) : (

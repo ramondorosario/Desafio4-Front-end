@@ -2,8 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import dayjs from "dayjs";
+import localeptBr from "dayjs/locale/pt-br";
 
 import { createContainer } from "unstated-next";
+dayjs.locale(localeptBr);
 
 function useLogin() {
   const [token, setToken] = React.useState(localStorage.getItem("token"));
@@ -24,10 +27,6 @@ function useLogin() {
         }
       });
   }
-
-  React.useEffect(() => {
-    console.log("token login", token);
-  }, [token]);
 
   function logout() {
     setToken(null);

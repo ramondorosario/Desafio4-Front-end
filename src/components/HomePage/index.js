@@ -4,13 +4,18 @@ import "./index.css";
 import CustomersIcon from "../../images/icon-customers.svg";
 import BillingIcon from "../../images/icon-billing.svg";
 
+import { RelatorioContainer } from "../../App";
+
 function MenuButton(props) {
   const { menuSelected, setMenuSelected, children, name } = props;
+  const { obterRelatorio } = RelatorioContainer.useContainer();
+
   return (
     <button
       className={menuSelected === name ? "menu-selected" : ""}
-      onClick={() => {
+      onClick={async () => {
         setMenuSelected(name);
+        obterRelatorio();
       }}
     >
       {children}
@@ -20,6 +25,8 @@ function MenuButton(props) {
 
 export function HomePage() {
   const [menuSelected, setMenuSelected] = React.useState("este mês");
+
+  const { relatorio } = RelatorioContainer.useContainer();
 
   return (
     <>
@@ -54,11 +61,15 @@ export function HomePage() {
           <div className="content-card">
             <div className="data in-day">
               <span>Em dia</span>
-              <span className="cont">0</span>
+              <span className="cont">
+                {relatorio ? relatorio.qtdClientesAdimplentes : 0}
+              </span>
             </div>
             <div className="data defaulters">
               <span>Inadimplentes</span>
-              <span className="cont">0</span>
+              <span className="cont">
+                {relatorio ? relatorio.qtdClientesInadimplentes : 0}
+              </span>
             </div>
           </div>
         </div>
@@ -72,15 +83,21 @@ export function HomePage() {
           <div className="content-card">
             <div className="data expected">
               <span>Previsto</span>
-              <span className="cont">0</span>
+              <span className="cont">
+                {relatorio ? relatorio.qtdCobrancasPrevistas : 0}
+              </span>
             </div>
             <div className="data in-day">
               <span>Em dia</span>
-              <span className="cont">0</span>
+              <span className="cont">
+                {relatorio ? relatorio.qtdCobrancasPagas : 0}
+              </span>
             </div>
             <div className="data defaulters">
               <span>Inadimplentes</span>
-              <span className="cont">0</span>
+              <span className="cont">
+                {relatorio ? relatorio.qtdCobrancasVencidas : 0}
+              </span>
             </div>
           </div>
         </div>

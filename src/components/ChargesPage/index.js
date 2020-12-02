@@ -1,12 +1,22 @@
 import React from "react";
 import "./index.css";
 
+import dayjs from "dayjs";
+
 import SearchIcon from "../../images/icon-search.svg";
 import PrintTicketIcon from "../../images/icon-print-ticket.svg";
 import BackIcon from "../../images/icon-back.svg";
 import NextIcon from "../../images/icon-next.svg";
 
+import { CobrancasContainer } from "../../App";
+
 export function ChargesPage() {
+  const { obterCobrancas, cobrancas } = CobrancasContainer.useContainer();
+
+  React.useEffect(() => {
+    obterCobrancas();
+  }, []);
+
   return (
     <>
       <nav className="nav-charges-page">
@@ -33,42 +43,23 @@ export function ChargesPage() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="data-name"> Nome e Sobrenome do cliente</td>
-              <td>Aqui vai alguma descrição</td>
-              <td>R$ 00.000,00</td>
-              <td className="status">[.....] Inadimplente</td>
-              <td>12/12/2020</td>
-              <td>
-                <button>
-                  <img src={PrintTicketIcon} alt="Icone editar cliente" />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="data-name">Nome e Sobrenome do cliente</td>
-              <td>Aqui vai alguma descrição</td>
-              <td>R$ 00.000,00</td>
-              <td className="status">[.....] Inadimplente</td>
-              <td>12/12/2020</td>
-              <td>
-                <button>
-                  <img src={PrintTicketIcon} alt="Icone editar cliente" />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="data-name">Nome e Sobrenome do cliente</td>
-              <td>Aqui vai alguma descrição</td>
-              <td>R$ 00.000,00</td>
-              <td className="status">[.....] Inadimplente</td>
-              <td>12/12/2020</td>
-              <td>
-                <button>
-                  <img src={PrintTicketIcon} alt="Icone editar cliente" />
-                </button>
-              </td>
-            </tr>
+            {cobrancas &&
+              cobrancas.map((registro) => {
+                return (
+                  <tr key={registro.id}>
+                    <td className="data-name">{registro.nomeDoCliente}</td>
+                    <td>{registro.descricao}</td>
+                    <td>R$ {(registro.valor / 100).toFixed(2)}</td>
+                    <td className="status">[.....] {registro.status}</td>
+                    <td>{dayjs(registro.vencimento).format("DD-MM-YYYY")}</td>
+                    <td>
+                      <button>
+                        <img src={PrintTicketIcon} alt="Icone editar cliente" />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
         <div className="container-buttons">

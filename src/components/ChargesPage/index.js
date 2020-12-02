@@ -7,11 +7,33 @@ import SearchIcon from "../../images/icon-search.svg";
 import PrintTicketIcon from "../../images/icon-print-ticket.svg";
 import BackIcon from "../../images/icon-back.svg";
 import NextIcon from "../../images/icon-next.svg";
+import PaymentOkIcon from "../../images/icon-payment-ok.svg";
+import PaymentPendingIcon from "../../images/icon-payment-pending.svg";
 
 import { CobrancasContainer } from "../../App";
 
 export function ChargesPage() {
   const { obterCobrancas, cobrancas } = CobrancasContainer.useContainer();
+
+  function statusPayment(status) {
+    if (status === "AGUARDANDO") {
+      return (
+        <>
+          <img src={PaymentPendingIcon} alt="Pagamento pendente" />
+          <span className="statusPayment paymentPending">Pendente</span>
+        </>
+      );
+    } else if (status === "PAGO") {
+      return (
+        <>
+          <img src={PaymentOkIcon} alt="Pagamento feito" />
+          <span className="statusPayment paymentOk">Pago</span>
+        </>
+      );
+    } else {
+      return <span className="statusPayment paymentExpiration">Vencido</span>;
+    }
+  }
 
   React.useEffect(() => {
     obterCobrancas();
@@ -50,7 +72,10 @@ export function ChargesPage() {
                     <td className="data-name">{registro.nomeDoCliente}</td>
                     <td>{registro.descricao}</td>
                     <td>R$ {(registro.valor / 100).toFixed(2)}</td>
-                    <td className="status">[.....] {registro.status}</td>
+                    <td className="status">
+                      {" "}
+                      {statusPayment(registro.status)}
+                    </td>
                     <td>{dayjs(registro.vencimento).format("DD-MM-YYYY")}</td>
                     <td>
                       <button>

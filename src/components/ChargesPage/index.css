@@ -1,3 +1,21 @@
 .nav-charges-page {
   align-self: flex-end;
 }
+
+.statusPayment {
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.paymentOk {
+  color: #4ec06e;
+}
+
+.paymentExpiration {
+  color: #ff4d4d;
+}
+
+.paymentPending {
+  color: #5197b5;
+}

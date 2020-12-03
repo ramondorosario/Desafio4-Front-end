@@ -4,8 +4,12 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import { ClientesContainer } from "../../App";
+
 export function AddCustomersPage() {
   const { handleSubmit, register, watch } = useForm();
+  const { criarCliente } = ClientesContainer.useContainer();
+
   const History = useHistory();
 
   const name = watch("name");
@@ -20,6 +24,13 @@ export function AddCustomersPage() {
       </header>
       <form
         onSubmit={handleSubmit(async (datas) => {
+          const dados = {
+            nome: datas.name,
+            email: datas.email,
+            cpf: datas.cpf,
+            tel: datas.tel,
+          };
+          criarCliente(dados);
           History.push("/customers");
         })}
       >
@@ -43,6 +54,7 @@ export function AddCustomersPage() {
         </div>
         <div className="container-buttons">
           <button
+            type="button"
             onClick={() => {
               History.push("/customers");
             }}

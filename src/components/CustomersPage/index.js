@@ -75,7 +75,7 @@ export function CustomersPage() {
             {clientes &&
               clientes.map((cliente) => {
                 return (
-                  <tr key={cliente.nome}>
+                  <tr key={cliente.email}>
                     <td>
                       <div className="data-name">{cliente.nome}</div>
                       <div>

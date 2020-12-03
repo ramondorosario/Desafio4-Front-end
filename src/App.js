@@ -16,6 +16,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { createContainer } from "unstated-next";
 
 import { LoginContainer } from "./index";
+import dayjs from "dayjs";
 
 function useRelatorio() {
   const [saldo, setSaldo] = React.useState(0);
@@ -116,7 +117,24 @@ function useClientes() {
       });
   }
 
-  return { obterClientes, clientes, obterClientePorBusca };
+  function criarCliente(dados) {
+    fetch(`http://localhost:8081/clientes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dados),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status < 399) {
+          obterClientes(1);
+        }
+      });
+  }
+
+  return { obterClientes, clientes, obterClientePorBusca, criarCliente };
 }
 
 export const RelatorioContainer = createContainer(useRelatorio);

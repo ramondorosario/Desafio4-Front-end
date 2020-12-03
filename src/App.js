@@ -75,7 +75,7 @@ function useCobrancas() {
       .then((res) => {
         if (res.status >= 200 && res.status <= 399) {
           setCobrancas(res.dados.cobrancas);
-        }
+        } else setCobrancas(false);
       });
   }
 
@@ -97,12 +97,26 @@ function useClientes() {
       .then((res) => {
         if (res.status >= 200 && res.status <= 399) {
           setClientes(res.dados.clientes);
-          console.log(res.dados.clientes[0]);
         }
       });
   }
 
-  return { obterClientes, clientes };
+  function obterClientePorBusca(pagina, busca) {
+    fetch(
+      `http://localhost:8081/clientes?busca=${busca}&clientesPorPagina=10&offset=${
+        (pagina - 1) * 10
+      }`,
+      { method: "GET", headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) {
+          setClientes(res.dados.clientes);
+        } else setClientes(false);
+      });
+  }
+
+  return { obterClientes, clientes, obterClientePorBusca };
 }
 
 export const RelatorioContainer = createContainer(useRelatorio);

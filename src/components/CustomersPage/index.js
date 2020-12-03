@@ -9,12 +9,20 @@ import BackIcon from "../../images/icon-back.svg";
 import NextIcon from "../../images/icon-next.svg";
 
 import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import { ClientesContainer } from "../../App";
 
 export function CustomersPage() {
   const [pagina, setPagina] = React.useState(1);
   const History = useHistory();
-  const { obterClientes, clientes } = ClientesContainer.useContainer();
+
+  const {
+    obterClientes,
+    clientes,
+    obterClientePorBusca,
+  } = ClientesContainer.useContainer();
+  const { handleSubmit, register } = useForm();
 
   React.useEffect(() => {
     obterClientes(pagina);
@@ -31,15 +39,26 @@ export function CustomersPage() {
         >
           Adicionar cliente
         </button>
-        <div className="container-search">
-          <input placeholder="Procurar por Nome, E-mail ou CPF" />
-          <button>
-            <div>
-              <img src={SearchIcon} alt="Botão de busca" />
-              Buscar
-            </div>
-          </button>
-        </div>
+        <form
+          onSubmit={handleSubmit((data) => {
+            if (data.search) obterClientePorBusca(pagina, data.search);
+            else obterClientes(1);
+          })}
+        >
+          <div className="container-search">
+            <input
+              placeholder="Procurar por Nome, E-mail ou CPF"
+              name="search"
+              ref={register}
+            />
+            <button>
+              <div>
+                <img src={SearchIcon} alt="Botão de busca" />
+                Buscar
+              </div>
+            </button>
+          </div>
+        </form>
       </nav>
       <div className="container-table">
         <table>

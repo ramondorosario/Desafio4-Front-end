@@ -21,7 +21,7 @@ export function LoginPage() {
     <div className="container-form">
       <form
         className="form"
-        onSubmit={handleSubmit(async (data) => {
+        onSubmit={handleSubmit((data) => {
           const { email, password } = data;
           login(email, password);
         })}

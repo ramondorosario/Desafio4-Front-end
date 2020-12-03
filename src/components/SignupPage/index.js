@@ -18,12 +18,7 @@ export function SignupPage() {
 
   return (
     <div className="container-form">
-      <form
-        className="form"
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
-      >
+      <form className="form" onSubmit={handleSubmit((data) => {})}>
         <img src={LogoAcademy} alt="Logo da Academy" />
         <label>
           Nome

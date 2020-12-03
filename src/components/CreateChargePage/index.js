@@ -19,11 +19,7 @@ export function CreateChargePage() {
       <header>
         <h2>// Criar cobrança</h2>
       </header>
-      <form
-        onSubmit={handleSubmit((datas) => {
-          console.log(datas);
-        })}
-      >
+      <form onSubmit={handleSubmit((datas) => {})}>
         <label>
           Cliente
           <input name="name" ref={register} />

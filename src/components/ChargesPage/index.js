@@ -11,45 +11,65 @@ import PaymentOkIcon from "../../images/icon-payment-ok.svg";
 import PaymentPendingIcon from "../../images/icon-payment-pending.svg";
 
 import { CobrancasContainer } from "../../App";
+import { useForm } from "react-hook-form";
+
+function statusPayment(status) {
+  if (status === "AGUARDANDO") {
+    return (
+      <>
+        <img src={PaymentPendingIcon} alt="Pagamento pendente" />
+        <span className="statusPayment paymentPending">Pendente</span>
+      </>
+    );
+  } else if (status === "PAGO") {
+    return (
+      <>
+        <img src={PaymentOkIcon} alt="Pagamento feito" />
+        <span className="statusPayment paymentOk">Pago</span>
+      </>
+    );
+  } else {
+    return <span className="statusPayment paymentExpiration">Vencido</span>;
+  }
+}
 
 export function ChargesPage() {
-  const { obterCobrancas, cobrancas } = CobrancasContainer.useContainer();
+  const [pagina, setPagina] = React.useState(1);
 
-  function statusPayment(status) {
-    if (status === "AGUARDANDO") {
-      return (
-        <>
-          <img src={PaymentPendingIcon} alt="Pagamento pendente" />
-          <span className="statusPayment paymentPending">Pendente</span>
-        </>
-      );
-    } else if (status === "PAGO") {
-      return (
-        <>
-          <img src={PaymentOkIcon} alt="Pagamento feito" />
-          <span className="statusPayment paymentOk">Pago</span>
-        </>
-      );
-    } else {
-      return <span className="statusPayment paymentExpiration">Vencido</span>;
-    }
-  }
+  const {
+    obterCobrancas,
+    cobrancas,
+    obterCobrancasPorBusca,
+  } = CobrancasContainer.useContainer();
+
+  const { handleSubmit, register } = useForm();
 
   React.useEffect(() => {
-    obterCobrancas();
+    obterCobrancas(pagina);
   }, []);
 
   return (
     <>
       <nav className="nav-charges-page">
         <div className="container-search">
-          <input placeholder="Procurar por Nome, E-mail ou CPF" />
-          <button>
-            <div>
-              <img src={SearchIcon} alt="Botão de busca" />
-              Buscar
-            </div>
-          </button>
+          <form
+            onSubmit={handleSubmit((data) => {
+              if (data.search) obterCobrancasPorBusca(data.search, pagina);
+              else obterCobrancas(1);
+            })}
+          >
+            <input
+              ref={register}
+              name="search"
+              placeholder="Procurar por Nome, E-mail ou CPF"
+            />
+            <button>
+              <div>
+                <img src={SearchIcon} alt="Botão de busca" />
+                Buscar
+              </div>
+            </button>
+          </form>
         </div>
       </nav>
       <div className="container-table">
@@ -76,7 +96,7 @@ export function ChargesPage() {
                       {" "}
                       {statusPayment(registro.status)}
                     </td>
-                    <td>{dayjs(registro.vencimento).format("DD-MM-YYYY")}</td>
+                    <td>{dayjs(registro.vencimento).format("DD/MM/YYYY")}</td>
                     <td>
                       <button>
                         <img src={PrintTicketIcon} alt="Icone editar cliente" />

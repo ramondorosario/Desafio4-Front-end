@@ -43,25 +43,71 @@ function useCobrancas() {
   const { token } = LoginContainer.useContainer();
   const [cobrancas, setCobrancas] = React.useState();
 
-  function obterCobrancas() {
-    fetch("http://localhost:8081/cobrancas", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    })
+  function obterCobrancas(pagina) {
+    fetch(
+      `http://localhost:8081/cobrancas?cobrancasPorPagina=10&offset=${
+        (pagina - 1) * 10
+      }`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         if (res.status >= 200 && res.status <= 399) {
-          console.log(res.dados.cobrancas);
           setCobrancas(res.dados.cobrancas);
         }
       });
   }
 
-  return { obterCobrancas, cobrancas };
+  function obterCobrancasPorBusca(busca, pagina) {
+    fetch(
+      `http://localhost:8081/cobrancas?busca=${busca}&cobrancasPorPagina=10&offset=${
+        (pagina - 1) * 10
+      }`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) {
+          setCobrancas(res.dados.cobrancas);
+        }
+      });
+  }
+
+  return { obterCobrancas, cobrancas, obterCobrancasPorBusca };
+}
+
+function useClientes() {
+  const { token } = LoginContainer.useContainer();
+  const [clientes, setClientes] = React.useState();
+
+  function obterClientes(pagina) {
+    fetch(
+      `http://localhost:8081/clientes?clientesPorPagina=10&offset=${
+        (pagina - 1) * 10
+      }`,
+      { method: "GET", headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) {
+          setClientes(res.dados.clientes);
+          console.log(res.dados.clientes[0]);
+        }
+      });
+  }
+
+  return { obterClientes, clientes };
 }
 
 export const RelatorioContainer = createContainer(useRelatorio);
 export const CobrancasContainer = createContainer(useCobrancas);
+export const ClientesContainer = createContainer(useClientes);
 
 export default function App() {
   const { token } = LoginContainer.useContainer();
@@ -88,17 +134,27 @@ export default function App() {
                 <Header />
                 <Switch>
                   <Route exact path="/home" component={HomePage} />
-                  <Route exact path="/customers" component={CustomersPage} />
                   <Route
-                    exact
-                    path="/customers/add"
-                    component={AddCustomersPage}
-                  />
-                  <Route
-                    exact
-                    path="/customers/edit"
-                    component={EditCustomerPage}
-                  />
+                    path={["/customers", "/customers/add", "/customers/edit"]}
+                  >
+                    <ClientesContainer.Provider>
+                      <Route
+                        exact
+                        path="/customers"
+                        component={CustomersPage}
+                      />
+                      <Route
+                        exact
+                        path="/customers/add"
+                        component={AddCustomersPage}
+                      />
+                      <Route
+                        exact
+                        path="/customers/edit"
+                        component={EditCustomerPage}
+                      />
+                    </ClientesContainer.Provider>
+                  </Route>
                   <Route path={["/charges", "/charges/new-charge"]}>
                     <CobrancasContainer.Provider>
                       <Route exact path="/charges" component={ChargesPage} />

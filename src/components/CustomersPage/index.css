@@ -1,0 +1,12 @@
+.status {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.in-day {
+  color: #4ec06e;
+}
+
+.not-in-day {
+  color: #ff4d4d;
+}

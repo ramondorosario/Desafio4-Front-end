@@ -16,7 +16,6 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { createContainer } from "unstated-next";
 
 import { LoginContainer } from "./index";
-import dayjs from "dayjs";
 
 function useRelatorio() {
   const [saldo, setSaldo] = React.useState(0);
@@ -80,16 +79,29 @@ function useCobrancas() {
       });
   }
 
-  return { obterCobrancas, cobrancas, obterCobrancasPorBusca };
+  function criarCobranca(dados) {
+    fetch("http://localhost:8081/cobrancas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dados),
+    })
+      .then()
+      .catch((err) => console.log(err));
+  }
+
+  return { obterCobrancas, cobrancas, obterCobrancasPorBusca, criarCobranca };
 }
 
 function useClientes() {
   const { token } = LoginContainer.useContainer();
   const [clientes, setClientes] = React.useState();
 
-  function obterClientes(pagina) {
+  function obterClientes(pagina, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/clientes?clientesPorPagina=10&offset=${
+      `http://localhost:8081/clientes?clientesPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       { method: "GET", headers: { Authorization: `Bearer ${token}` } }
@@ -98,6 +110,7 @@ function useClientes() {
       .then((res) => {
         if (res.status >= 200 && res.status <= 399) {
           setClientes(res.dados.clientes);
+          console.log(res.dados.clientes);
         }
       });
   }
@@ -158,49 +171,41 @@ export default function App() {
       {token && (
         <>
           <RelatorioContainer.Provider>
-            <div className="columns">
-              <div className="column-menu-bar">
-                <MenuBar />
+            <ClientesContainer.Provider>
+              <div className="columns">
+                <div className="column-menu-bar">
+                  <MenuBar />
+                </div>
+                <div className="column-main">
+                  <Header />
+                  <Switch>
+                    <Route exact path="/home" component={HomePage} />
+                    <Route exact path="/customers" component={CustomersPage} />
+                    <Route
+                      exact
+                      path="/customers/add"
+                      component={AddCustomersPage}
+                    />
+                    <Route
+                      exact
+                      path="/customers/edit"
+                      component={EditCustomerPage}
+                    />
+                    <Route path={["/charges", "/charges/new-charge"]}>
+                      <CobrancasContainer.Provider>
+                        <Route exact path="/charges" component={ChargesPage} />
+                        <Route
+                          exact
+                          path="/charges/new-charge"
+                          component={CreateChargePage}
+                        />
+                      </CobrancasContainer.Provider>
+                    </Route>
+                    <Route path="/" render={() => <Redirect to="/home" />} />
+                  </Switch>
+                </div>
               </div>
-              <div className="column-main">
-                <Header />
-                <Switch>
-                  <Route exact path="/home" component={HomePage} />
-                  <Route
-                    path={["/customers", "/customers/add", "/customers/edit"]}
-                  >
-                    <ClientesContainer.Provider>
-                      <Route
-                        exact
-                        path="/customers"
-                        component={CustomersPage}
-                      />
-                      <Route
-                        exact
-                        path="/customers/add"
-                        component={AddCustomersPage}
-                      />
-                      <Route
-                        exact
-                        path="/customers/edit"
-                        component={EditCustomerPage}
-                      />
-                    </ClientesContainer.Provider>
-                  </Route>
-                  <Route path={["/charges", "/charges/new-charge"]}>
-                    <CobrancasContainer.Provider>
-                      <Route exact path="/charges" component={ChargesPage} />
-                      <Route
-                        exact
-                        path="/charges/new-charge"
-                        component={CreateChargePage}
-                      />
-                    </CobrancasContainer.Provider>
-                  </Route>
-                  <Route path="/" render={() => <Redirect to="/home" />} />
-                </Switch>
-              </div>
-            </div>
+            </ClientesContainer.Provider>
           </RelatorioContainer.Provider>
         </>
       )}

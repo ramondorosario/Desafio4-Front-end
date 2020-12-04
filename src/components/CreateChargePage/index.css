@@ -11,3 +11,14 @@
   font-weight: normal;
   color: #868686;
 }
+
+textarea {
+  margin-bottom: 5px;
+}
+
+select {
+  margin-top: 5px;
+  padding: 8px 5px;
+  border: 1px solid #374952;
+  border-radius: 8px;
+}

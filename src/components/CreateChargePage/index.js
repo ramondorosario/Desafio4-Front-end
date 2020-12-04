@@ -5,24 +5,62 @@ import "./index.css";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import { ClientesContainer } from "../../App";
+import { CobrancasContainer } from "../../App";
+
 export function CreateChargePage() {
   const History = useHistory();
   const { handleSubmit, register, watch } = useForm();
+  const { obterClientes, clientes } = ClientesContainer.useContainer();
+  const { criarCobranca } = CobrancasContainer.useContainer();
 
-  const name = watch("name");
+  const idClient = watch("idClient");
   const description = watch("description");
   const value = watch("value");
-  const expiration = watch("tel");
+  const expiration = watch("expiration");
+
+  React.useEffect(() => {
+    obterClientes(1, 999);
+  }, []);
 
   return (
     <div className="container-content-form">
       <header>
         <h2>// Criar cobrança</h2>
       </header>
-      <form onSubmit={handleSubmit((datas) => {})}>
+      <form
+        onSubmit={handleSubmit((datas) => {
+          let valor;
+          if (datas.value.indexOf(",") !== -1) {
+            valor = datas.value.replace(",", ".") * 100;
+          } else {
+            valor = datas.value * 100;
+          }
+
+          const dados = {
+            idDoCliente: datas.idClient,
+            descricao: datas.description,
+            valor,
+            vencimento: datas.expiration,
+          };
+
+          criarCobranca(dados);
+          History.push("/charges");
+        })}
+      >
         <label>
           Cliente
-          <input name="name" ref={register} />
+          <select name="idClient" ref={register}>
+            <option>Selecione o cliente</option>
+            {clientes &&
+              clientes.map((cliente, i) => {
+                return (
+                  <option key={i + 1} value={cliente.id}>
+                    {cliente.nome}
+                  </option>
+                );
+              })}
+          </select>
         </label>
         <label>
           Descrição
@@ -36,11 +74,12 @@ export function CreateChargePage() {
           </label>
           <label className="charge-expiration">
             Vencimento
-            <input name="expiration" type="date" />
+            <input name="expiration" ref={register} type="date" />
           </label>
         </div>
         <div className="container-buttons">
           <button
+            type="button"
             onClick={() => {
               History.push("/charges");
             }}
@@ -48,9 +87,9 @@ export function CreateChargePage() {
             Cancelar
           </button>
           <button
-            disabled={!name || !description || !value || !expiration}
+            disabled={!idClient || !description || !value || !expiration}
             className={
-              name && description && value && expiration
+              idClient && description && value && expiration
                 ? "config-button-selected"
                 : "config-button"
             }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import "./index.css";
 
@@ -21,12 +22,13 @@ export function CustomersPage() {
     obterClientes,
     clientes,
     obterClientePorBusca,
+    editarCliente,
   } = ClientesContainer.useContainer();
   const { handleSubmit, register } = useForm();
 
   React.useEffect(() => {
     obterClientes(pagina);
-  }, []);
+  }, [editarCliente]);
 
   return (
     <>
@@ -97,7 +99,12 @@ export function CustomersPage() {
                       {cliente.estaInadimplente ? "inadimplente" : "em dia"}
                     </td>
                     <td>
-                      <button>
+                      <button
+                        onClick={() => {
+                          History.push("/customers/edit");
+                          obterClientePorBusca(1, cliente.email, 1);
+                        }}
+                      >
                         <img src={EditIcon} alt="Icone editar cliente" />
                       </button>
                     </td>

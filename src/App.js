@@ -110,14 +110,13 @@ function useClientes() {
       .then((res) => {
         if (res.status >= 200 && res.status <= 399) {
           setClientes(res.dados.clientes);
-          console.log(res.dados.clientes);
         }
       });
   }
 
-  function obterClientePorBusca(pagina, busca) {
+  function obterClientePorBusca(pagina, busca, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/clientes?busca=${busca}&clientesPorPagina=10&offset=${
+      `http://localhost:8081/clientes?busca=${busca}&clientesPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       { method: "GET", headers: { Authorization: `Bearer ${token}` } }
@@ -147,7 +146,30 @@ function useClientes() {
       });
   }
 
-  return { obterClientes, clientes, obterClientePorBusca, criarCliente };
+  function editarCliente(dados) {
+    fetch(`http://localhost:8081/clientes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dados),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status < 399) {
+          console.log("atualizado");
+        }
+      });
+  }
+
+  return {
+    obterClientes,
+    clientes,
+    obterClientePorBusca,
+    criarCliente,
+    editarCliente,
+  };
 }
 
 function useUsuario() {

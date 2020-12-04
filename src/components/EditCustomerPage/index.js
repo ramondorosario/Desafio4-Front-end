@@ -4,9 +4,12 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import { ClientesContainer } from "../../App";
+
 export function EditCustomerPage() {
   const History = useHistory();
   const { handleSubmit, register, watch } = useForm();
+  const { editarCliente, clientes } = ClientesContainer.useContainer();
 
   const name = watch("name");
   const email = watch("email");
@@ -20,6 +23,14 @@ export function EditCustomerPage() {
       </header>
       <form
         onSubmit={handleSubmit(async (datas) => {
+          const dados = {
+            id: clientes[0].id,
+            nome: datas.name,
+            cpf: datas.cpf,
+            email: datas.email,
+          };
+
+          editarCliente(dados);
           History.push("/customers");
         })}
       >
@@ -43,6 +54,7 @@ export function EditCustomerPage() {
         </div>
         <div className="container-buttons">
           <button
+            type="button"
             onClick={() => {
               History.push("/customers");
             }}

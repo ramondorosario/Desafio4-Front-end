@@ -6,11 +6,15 @@ import HiddenPassword from "../../images/hidden-password.svg";
 import ShowPassword from "../../images/show-password.svg";
 
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import { UsuariosContainer } from "../../App";
 
 export function SignupPage() {
   const { register, handleSubmit, watch } = useForm();
   const [hiddenPassword, setHiddenPassword] = React.useState("false");
+  const { criarConta } = UsuariosContainer.useContainer();
+  const { History } = useHistory();
 
   const email = watch("email");
   const password = watch("password");
@@ -18,7 +22,18 @@ export function SignupPage() {
 
   return (
     <div className="container-form">
-      <form className="form" onSubmit={handleSubmit((data) => {})}>
+      <form
+        className="form"
+        onSubmit={handleSubmit((data) => {
+          const dados = {
+            email: data.email,
+            senha: data.password,
+            nome: data.name,
+          };
+          criarConta(dados);
+          History.push("/login");
+        })}
+      >
         <img src={LogoAcademy} alt="Logo da Academy" />
         <label>
           Nome

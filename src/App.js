@@ -150,9 +150,26 @@ function useClientes() {
   return { obterClientes, clientes, obterClientePorBusca, criarCliente };
 }
 
+function useUsuario() {
+  function criarConta(dados) {
+    fetch("http://localhost:8081/usuarios", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+  }
+
+  return { criarConta };
+}
+
 export const RelatorioContainer = createContainer(useRelatorio);
 export const CobrancasContainer = createContainer(useCobrancas);
 export const ClientesContainer = createContainer(useClientes);
+export const UsuariosContainer = createContainer(useUsuario);
 
 export default function App() {
   const { token } = LoginContainer.useContainer();
@@ -162,9 +179,11 @@ export default function App() {
       {!token && (
         <>
           <Switch>
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/signup" component={SignupPage} />
-            <Route path="*" render={() => <Redirect to="/login" />} />
+            <UsuariosContainer.Provider>
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/signup" component={SignupPage} />
+              <Route path="*" render={() => <Redirect to="/login" />} />
+            </UsuariosContainer.Provider>
           </Switch>
         </>
       )}

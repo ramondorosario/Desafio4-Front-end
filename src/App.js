@@ -42,10 +42,12 @@ function useRelatorio() {
 function useCobrancas() {
   const { token } = LoginContainer.useContainer();
   const [cobrancas, setCobrancas] = React.useState();
+  const [totalDePaginas, setTotalDePaginas] = React.useState();
+  const [ultimaPagina, setUltimaPagina] = React.useState();
 
-  function obterCobrancas(pagina) {
+  function obterCobrancas(pagina = 1, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/cobrancas?cobrancasPorPagina=10&offset=${
+      `http://localhost:8081/cobrancas?cobrancasPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       {
@@ -61,9 +63,9 @@ function useCobrancas() {
       });
   }
 
-  function obterCobrancasPorBusca(busca, pagina) {
+  function obterCobrancasPorBusca(busca, pagina = 1, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/cobrancas?busca=${busca}&cobrancasPorPagina=10&offset=${
+      `http://localhost:8081/cobrancas?busca=${busca}&cobrancasPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       {
@@ -92,14 +94,69 @@ function useCobrancas() {
       .catch((err) => console.log(err));
   }
 
-  return { obterCobrancas, cobrancas, obterCobrancasPorBusca, criarCobranca };
+  function totalPaginasDeCobranca() {
+    fetch(`http://localhost:8081/cobrancas?cobrancasPorPagina=99999&offset=0`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) {
+          const paginas = Math.ceil(res.dados.cobrancas.length / 10);
+          const arrayParaMap = [];
+          for (let i = 1; i <= paginas; i++) {
+            arrayParaMap.push(i);
+          }
+          console.log("array para map: ", arrayParaMap);
+
+          setTotalDePaginas(arrayParaMap);
+          setUltimaPagina(arrayParaMap.length);
+        }
+      });
+  }
+
+  function totalPaginasDeCobrancaPorBusca(busca) {
+    fetch(
+      `http://localhost:8081/cobrancas?busca=${busca}&cobrancasPorPagina=99999&offset=0`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) {
+          const paginas = Math.ceil(res.dados.cobrancas.length / 10);
+          const arrayParaMap = [];
+
+          for (let i = 1; i <= paginas; i++) {
+            arrayParaMap.push(i);
+          }
+          setTotalDePaginas(arrayParaMap);
+          setUltimaPagina(arrayParaMap.length);
+        }
+      });
+  }
+
+  return {
+    obterCobrancas,
+    cobrancas,
+    totalDePaginas,
+    totalPaginasDeCobranca,
+    totalPaginasDeCobrancaPorBusca,
+    obterCobrancasPorBusca,
+    criarCobranca,
+    ultimaPagina,
+  };
 }
 
 function useClientes() {
   const { token } = LoginContainer.useContainer();
   const [clientes, setClientes] = React.useState();
+  const [totalDePaginas, setTotalDePaginas] = React.useState();
+  const [ultimaPagina, setUltimaPagina] = React.useState();
 
-  function obterClientes(pagina, qtdPorPagina = 10) {
+  function obterClientes(pagina = 1, qtdPorPagina = 10) {
     fetch(
       `http://localhost:8081/clientes?clientesPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
@@ -114,7 +171,7 @@ function useClientes() {
       });
   }
 
-  function obterClientePorBusca(pagina, busca, qtdPorPagina = 10) {
+  function obterClientePorBusca(pagina = 1, busca, qtdPorPagina = 10) {
     fetch(
       `http://localhost:8081/clientes?busca=${busca}&clientesPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
@@ -163,12 +220,59 @@ function useClientes() {
       });
   }
 
+  function totalPaginasDeClientes() {
+    fetch(`http://localhost:8081/clientes?clientesPorPagina=99999&offset=0`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) {
+          const paginas = Math.ceil(res.dados.clientes.length / 10);
+          const arrayParaMap = [];
+          for (let i = 1; i <= paginas; i++) {
+            arrayParaMap.push(i);
+          }
+
+          setTotalDePaginas(arrayParaMap);
+          setUltimaPagina(arrayParaMap.length);
+        }
+      });
+  }
+
+  function totalPaginasDeClientesPorBusca(busca) {
+    fetch(
+      `http://localhost:8081/clientes?busca=${busca}&clientesPorPagina=99999&offset=0`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) {
+          const paginas = Math.ceil(res.dados.clientes.length / 10);
+          const arrayParaMap = [];
+
+          for (let i = 1; i <= paginas; i++) {
+            arrayParaMap.push(i);
+          }
+          setTotalDePaginas(arrayParaMap);
+          setUltimaPagina(arrayParaMap.length);
+        }
+      });
+  }
+
   return {
     obterClientes,
     clientes,
+    totalDePaginas,
     obterClientePorBusca,
     criarCliente,
     editarCliente,
+    ultimaPagina,
+    totalPaginasDeClientes,
+    totalPaginasDeClientesPorBusca,
   };
 }
 

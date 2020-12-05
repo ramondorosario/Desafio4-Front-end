@@ -40,13 +40,18 @@ export function ChargesPage() {
   const {
     obterCobrancas,
     cobrancas,
+    totalDePaginas,
+    ultimaPagina,
+    totalPaginasDeCobranca,
+    totalPaginasDeCobrancaPorBusca,
     obterCobrancasPorBusca,
   } = CobrancasContainer.useContainer();
 
   const { handleSubmit, register } = useForm();
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
     obterCobrancas(pagina);
+    totalPaginasDeCobranca();
   }, []);
 
   return (
@@ -55,8 +60,10 @@ export function ChargesPage() {
         <div className="container-search">
           <form
             onSubmit={handleSubmit((data) => {
-              if (data.search) obterCobrancasPorBusca(data.search, pagina);
-              else obterCobrancas(1);
+              if (data.search) {
+                obterCobrancasPorBusca(data.search, pagina);
+                totalPaginasDeCobrancaPorBusca(data.search);
+              } else obterCobrancas(1);
             })}
           >
             <input
@@ -109,20 +116,43 @@ export function ChargesPage() {
           </tbody>
         </table>
         <div className="container-buttons">
-          <button className="back-page">
+          <button
+            className={`back-page ${pagina === 1 ? "disabled" : ""}`}
+            onClick={() => {
+              if (pagina === 1) return;
+              setPagina(pagina - 1);
+              obterCobrancas(pagina - 1);
+            }}
+          >
             <img src={BackIcon} alt="Página anterior" />
           </button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>10</button>
-          <button className="next-page">
+          {totalDePaginas ? (
+            totalDePaginas.map((p, i) => {
+              return (
+                <button
+                  key={i + 1}
+                  onClick={() => {
+                    setPagina(i + 1);
+                    obterCobrancas(i + 1);
+                  }}
+                >
+                  <div className={pagina === i + 1 ? "btnContainer" : ""}>
+                    {i + 1}
+                  </div>
+                </button>
+              );
+            })
+          ) : (
+            <button className="btnContainer">1</button>
+          )}
+          <button
+            className={`next-page ${pagina === ultimaPagina ? "disabled" : ""}`}
+            onClick={() => {
+              if (pagina === totalDePaginas.length) return;
+              setPagina(pagina + 1);
+              obterCobrancas(pagina + 1);
+            }}
+          >
             <img src={NextIcon} alt="Próxima página" />
           </button>
         </div>

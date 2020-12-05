@@ -11,6 +11,7 @@ import { AddCustomersPage } from "./components/AddCustomersPage";
 import { EditCustomerPage } from "./components/EditCustomerPage";
 import { ChargesPage } from "./components/ChargesPage";
 import { CreateChargePage } from "./components/CreateChargePage";
+import { RecoverPassword } from "./components/RecoverPassword";
 
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { createContainer } from "unstated-next";
@@ -307,6 +308,11 @@ export default function App() {
           <Switch>
             <UsuariosContainer.Provider>
               <Route exact path="/login" component={LoginPage} />
+              <Route
+                exact
+                path="/recover-password"
+                component={RecoverPassword}
+              />
               <Route exact path="/signup" component={SignupPage} />
               <Route path="*" render={() => <Redirect to="/login" />} />
             </UsuariosContainer.Provider>

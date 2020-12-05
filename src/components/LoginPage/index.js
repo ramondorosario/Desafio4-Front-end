@@ -59,7 +59,7 @@ export function LoginPage() {
           </button>
         </label>
         <div className="forgot-password">
-          <a href="/">Esqueci minha senha</a>
+          <Link to="/recover-password">Esqueci minha senha</Link>
         </div>
 
         <button

@@ -36,11 +36,6 @@ export function RecoverPassword() {
             placeholder="exemplo@gmail.com"
           />
         </label>
-
-        <div className="forgot-password">
-          <a href="/">Esqueci minha senha</a>
-        </div>
-
         <button
           disabled={email ? false : true}
           className={email ? "not-disabled" : ""}

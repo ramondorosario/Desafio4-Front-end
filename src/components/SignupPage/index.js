@@ -14,7 +14,7 @@ export function SignupPage() {
   const { register, handleSubmit, watch } = useForm();
   const [hiddenPassword, setHiddenPassword] = React.useState("false");
   const { criarConta } = UsuariosContainer.useContainer();
-  const { History } = useHistory();
+  const History = useHistory();
 
   const email = watch("email");
   const password = watch("password");
@@ -79,7 +79,7 @@ export function SignupPage() {
         </button>
       </form>
       <div className="msg-signup">
-        Já possui uma conta? <Link to="/">Acesse aqui!</Link>
+        Já possui uma conta? <Link to="/login">Acesse aqui!</Link>
       </div>
     </div>
   );

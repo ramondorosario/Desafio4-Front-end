@@ -116,7 +116,6 @@ function useCobrancas() {
           for (let i = 1; i <= paginas; i++) {
             arrayParaMap.push(i);
           }
-          console.log("array para map: ", arrayParaMap);
 
           setTotalDePaginas(arrayParaMap);
           setUltimaPagina(arrayParaMap.length);
@@ -313,10 +312,8 @@ function useUsuario() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      });
+      .then()
+      .catch((err) => err);
   }
 
   return { criarConta };

@@ -21,6 +21,8 @@ function useLogin() {
         if (res.dados.token) {
           setToken(res.dados.token);
           localStorage.setItem("token", res.dados.token);
+        } else {
+          alert("Email ou senha incorreto");
         }
       });
   }

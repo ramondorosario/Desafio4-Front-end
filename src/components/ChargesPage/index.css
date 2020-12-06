@@ -28,3 +28,7 @@
 .disabled {
   opacity: 0.5;
 }
+
+.status-hover:hover {
+  cursor: pointer;
+}

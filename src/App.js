@@ -24,7 +24,7 @@ function useRelatorio() {
   const { token } = LoginContainer.useContainer();
 
   function obterRelatorio() {
-    fetch("http://localhost:8081/relatorios", {
+    fetch("https://back-desafio4-ramon.herokuapp.com/relatorios", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -43,12 +43,14 @@ function useRelatorio() {
 function useCobrancas() {
   const { token } = LoginContainer.useContainer();
   const [cobrancas, setCobrancas] = React.useState();
+  const [novaCobranca, setNovaCobranca] = React.useState([]);
+  const [pagamentoRealizado, setPagamentoRealizado] = React.useState();
   const [totalDePaginas, setTotalDePaginas] = React.useState();
   const [ultimaPagina, setUltimaPagina] = React.useState();
 
   function obterCobrancas(pagina = 1, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/cobrancas?cobrancasPorPagina=${qtdPorPagina}&offset=${
+      `https://back-desafio4-ramon.herokuapp.com/cobrancas?cobrancasPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       {
@@ -66,7 +68,7 @@ function useCobrancas() {
 
   function obterCobrancasPorBusca(busca, pagina = 1, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/cobrancas?busca=${busca}&cobrancasPorPagina=${qtdPorPagina}&offset=${
+      `https://back-desafio4-ramon.herokuapp.com/cobrancas?busca=${busca}&cobrancasPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       {
@@ -83,7 +85,7 @@ function useCobrancas() {
   }
 
   function criarCobranca(dados) {
-    fetch("http://localhost:8081/cobrancas", {
+    fetch("https://back-desafio4-ramon.herokuapp.com/cobrancas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,15 +93,21 @@ function useCobrancas() {
       },
       body: JSON.stringify(dados),
     })
-      .then()
-      .catch((err) => console.log(err));
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399)
+          setNovaCobranca(res.dados.cobranca);
+      });
   }
 
   function totalPaginasDeCobranca() {
-    fetch(`http://localhost:8081/cobrancas?cobrancasPorPagina=99999&offset=0`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      `https://back-desafio4-ramon.herokuapp.com/cobrancas?cobrancasPorPagina=99999&offset=0`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         if (res.status >= 200 && res.status <= 399) {
@@ -118,7 +126,7 @@ function useCobrancas() {
 
   function totalPaginasDeCobrancaPorBusca(busca) {
     fetch(
-      `http://localhost:8081/cobrancas?busca=${busca}&cobrancasPorPagina=99999&offset=0`,
+      `https://back-desafio4-ramon.herokuapp.com/cobrancas?busca=${busca}&cobrancasPorPagina=99999&offset=0`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -139,6 +147,21 @@ function useCobrancas() {
       });
   }
 
+  function pagarCobranca(dados) {
+    fetch(`https://back-desafio4-ramon.herokuapp.com/cobrancas`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dados),
+    })
+      .then((res) => res.json)
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 399) setPagamentoRealizado(true);
+      });
+  }
+
   return {
     obterCobrancas,
     cobrancas,
@@ -148,6 +171,9 @@ function useCobrancas() {
     obterCobrancasPorBusca,
     criarCobranca,
     ultimaPagina,
+    novaCobranca,
+    pagarCobranca,
+    pagamentoRealizado,
   };
 }
 
@@ -159,7 +185,7 @@ function useClientes() {
 
   function obterClientes(pagina = 1, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/clientes?clientesPorPagina=${qtdPorPagina}&offset=${
+      `https://back-desafio4-ramon.herokuapp.com/clientes?clientesPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       { method: "GET", headers: { Authorization: `Bearer ${token}` } }
@@ -174,7 +200,7 @@ function useClientes() {
 
   function obterClientePorBusca(pagina = 1, busca, qtdPorPagina = 10) {
     fetch(
-      `http://localhost:8081/clientes?busca=${busca}&clientesPorPagina=${qtdPorPagina}&offset=${
+      `https://back-desafio4-ramon.herokuapp.com/clientes?busca=${busca}&clientesPorPagina=${qtdPorPagina}&offset=${
         (pagina - 1) * 10
       }`,
       { method: "GET", headers: { Authorization: `Bearer ${token}` } }
@@ -188,7 +214,7 @@ function useClientes() {
   }
 
   function criarCliente(dados) {
-    fetch(`http://localhost:8081/clientes`, {
+    fetch(`https://back-desafio4-ramon.herokuapp.com/clientes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -205,7 +231,7 @@ function useClientes() {
   }
 
   function editarCliente(dados) {
-    fetch(`http://localhost:8081/clientes`, {
+    fetch(`https://back-desafio4-ramon.herokuapp.com/clientes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -222,10 +248,13 @@ function useClientes() {
   }
 
   function totalPaginasDeClientes() {
-    fetch(`http://localhost:8081/clientes?clientesPorPagina=99999&offset=0`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      `https://back-desafio4-ramon.herokuapp.com/clientes?clientesPorPagina=99999&offset=0`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         if (res.status >= 200 && res.status <= 399) {
@@ -243,7 +272,7 @@ function useClientes() {
 
   function totalPaginasDeClientesPorBusca(busca) {
     fetch(
-      `http://localhost:8081/clientes?busca=${busca}&clientesPorPagina=99999&offset=0`,
+      `https://back-desafio4-ramon.herokuapp.com/clientes?busca=${busca}&clientesPorPagina=99999&offset=0`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -279,7 +308,7 @@ function useClientes() {
 
 function useUsuario() {
   function criarConta(dados) {
-    fetch("http://localhost:8081/usuarios", {
+    fetch("https://back-desafio4-ramon.herokuapp.com/usuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados),

@@ -12,6 +12,7 @@ import PaymentOkIcon from "../../images/icon-payment-ok.svg";
 import PaymentPendingIcon from "../../images/icon-payment-pending.svg";
 
 import { CobrancasContainer } from "../../App";
+import { RelatorioContainer } from "../../App";
 import { useForm } from "react-hook-form";
 
 function statusPayment(status) {
@@ -19,7 +20,9 @@ function statusPayment(status) {
     return (
       <>
         <img src={PaymentPendingIcon} alt="Pagamento pendente" />
-        <span className="statusPayment paymentPending">Pendente</span>
+        <span className="statusPayment paymentPending status-hover">
+          Pendente
+        </span>
       </>
     );
   } else if (status === "PAGO") {
@@ -45,14 +48,17 @@ export function ChargesPage() {
     totalPaginasDeCobranca,
     totalPaginasDeCobrancaPorBusca,
     obterCobrancasPorBusca,
+    novaCobranca,
+    pagarCobranca,
   } = CobrancasContainer.useContainer();
+  const { obterRelatorio, saldo } = RelatorioContainer.useContainer();
 
   const { handleSubmit, register } = useForm();
 
   React.useEffect(async () => {
     obterCobrancas(pagina);
     totalPaginasDeCobranca();
-  }, []);
+  }, [novaCobranca, saldo]);
 
   return (
     <>
@@ -100,7 +106,15 @@ export function ChargesPage() {
                     <td className="data-name">{registro.nomeDoCliente}</td>
                     <td>{registro.descricao}</td>
                     <td>R$ {(registro.valor / 100).toFixed(2)}</td>
-                    <td className="status">
+                    <td
+                      onClick={() => {
+                        if (registro.status === "AGUARDANDO") {
+                          const dados = { idDaCobranca: registro.id };
+                          pagarCobranca(dados);
+                          obterRelatorio();
+                        }
+                      }}
+                    >
                       {" "}
                       {statusPayment(registro.status)}
                     </td>

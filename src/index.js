@@ -12,7 +12,7 @@ function useLogin() {
   const [token, setToken] = React.useState(localStorage.getItem("token"));
 
   function login(email, senha) {
-    fetch(`http://localhost:8081/auth`, {
+    fetch(`https://back-desafio4-ramon.herokuapp.com/auth`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
